@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 import peiwen.commonutils.R;
 
 import javax.annotation.Resource;
-//123456
 @RestController
 @RequestMapping("/eduoss/fileoss")
 @CrossOrigin
