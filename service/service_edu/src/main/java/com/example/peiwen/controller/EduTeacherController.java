@@ -30,7 +30,7 @@ import java.util.List;
 public class EduTeacherController {
   @Resource
     EduTeacherService eduTeacherService;
-  //查询表中所有数据
+  //查询所有讲师数据
     //rest风格
     @GetMapping("findAllTeacher")
     @ApiOperation(value = "所有讲师列表")

@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.peiwen.entity.EduSubject;
 import com.example.peiwen.entity.excel.SubjectData;
 import com.example.peiwen.service.EduSubjectService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
 
