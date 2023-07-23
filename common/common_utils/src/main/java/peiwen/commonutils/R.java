@@ -16,7 +16,7 @@ public class R {
     @ApiModelProperty(value = "返回消息")
     private String message;
     @ApiModelProperty(value = "返回数据")
-   Map<String,Object> data = new HashMap<String,Object>();
+   Map<String,Object> data = new HashMap<>();
     //把无参构造方法私有化
     private R(){}
 

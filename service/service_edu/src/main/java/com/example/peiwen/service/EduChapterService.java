@@ -2,6 +2,9 @@ package com.example.peiwen.service;
 
 import com.example.peiwen.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.peiwen.entity.chater.ChaterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-07-21
  */
 public interface EduChapterService extends IService<EduChapter> {
+    //    返回课程大纲列表
+    List<ChaterVo> getChapterVideoByCourseId(String courseId);
+    //    删除章节
+    void deleteChapter(String chapterId);
 
 }

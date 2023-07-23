@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author peiwen
- * @since 2023-04-04
+ * @since 2023-04-04。
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
