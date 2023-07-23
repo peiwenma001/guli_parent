@@ -40,7 +40,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 //        手动同步id
         eduCourseDescription.setId(eduCourseId);
         eduCourseDescriptionService.save(eduCourseDescription);
-//        返回id给前端
+//        返回id给前端。
         return eduCourseDescription.getId();
     }
 }
