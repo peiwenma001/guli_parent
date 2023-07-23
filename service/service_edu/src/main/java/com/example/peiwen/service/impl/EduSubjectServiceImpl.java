@@ -78,7 +78,7 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
                     twoSubjectArrayList.add(twoSubject);
                 }
             }
-//            把一级分类下面的所有二级分类放到一级分类中
+//            把一级分类下面的所有二级分类放到一级分类中。
             oneSubject.setChildren(twoSubjectArrayList);
         }
         return finalSubjectList;

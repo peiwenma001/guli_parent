@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  * 课程
  * </p>
  *
- * @author peiwen
+ * @author peiwen。
  * @since 2023-07-21
  */
 @Data

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-//一级分类
+//一级分类。
 public class OneSubject {
     private String id;
     private String title;

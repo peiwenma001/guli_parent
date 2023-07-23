@@ -13,6 +13,6 @@ import com.example.peiwen.entity.vo.CourseInfoVo;
  * @since 2023-07-21
  */
 public interface EduCourseService extends IService<EduCourse> {
-    //    添加课程基本信息
+    //    添加课程基本信息。
     String saveCourseInfo(CourseInfoVo courseInfoVo);
 }

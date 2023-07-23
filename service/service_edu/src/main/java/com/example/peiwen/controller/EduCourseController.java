@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 public class EduCourseController {
     @Resource
     private EduCourseService courseService;
-//    添加课程基本信息
+//    添加课程基本信息。
     @PostMapping("addCourseInfo")
     public R addCourseInfo(@RequestBody CourseInfoVo courseInfoVo){
         String id =courseService.saveCourseInfo(courseInfoVo);

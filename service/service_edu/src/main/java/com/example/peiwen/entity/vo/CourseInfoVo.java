@@ -8,7 +8,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-//封装课程发布所需信息表单
+//封装课程发布所需信息表单。
 public class CourseInfoVo {
     private String id;
 
