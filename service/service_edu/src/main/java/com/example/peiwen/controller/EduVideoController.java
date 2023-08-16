@@ -1,9 +1,13 @@
 package com.example.peiwen.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.peiwen.entity.EduVideo;
+import com.example.peiwen.service.EduVideoService;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import peiwen.commonutils.R;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -14,8 +18,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-07-21
  */
 @RestController
-@RequestMapping("/edu-video")
+@RequestMapping("/eduservice/video")
+@CrossOrigin
 public class EduVideoController {
-
+    @Resource
+    private EduVideoService videoService;
+//    添加小节
+    @PostMapping("addVideo")
+    public R addVideo(@RequestBody EduVideo eduVideo){
+        videoService.save(eduVideo);
+        return R.ok();
+    }
+//    删除小节
+//    后面里面会有视频，后面完善
+    @DeleteMapping("{id}")
+    public R deleteVideo(@PathVariable String id){
+        videoService.removeById(id);
+        return R.ok();
+    }
+//    修改小节
+    @PostMapping("updateVideo")
+    public R putVideo(@RequestBody EduVideo eduVideo){
+       videoService.updateById(eduVideo);
+        return R.ok();
+    }
+//    根据id查询小节
+    @GetMapping("{id}")
+    public R getOneVideo(@PathVariable String id){
+        EduVideo OneVideo = videoService.getById(id);
+        return R.ok().data("OneVideo",OneVideo);
+    }
 }
 

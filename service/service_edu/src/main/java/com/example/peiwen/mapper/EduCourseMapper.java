@@ -2,6 +2,7 @@ package com.example.peiwen.mapper;
 
 import com.example.peiwen.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.peiwen.entity.vo.CoursePublishVo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -14,5 +15,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
-
+//    根据课程id查询课程基本信息
+    public CoursePublishVo getPublishCourseInfo(String courseId);
 }

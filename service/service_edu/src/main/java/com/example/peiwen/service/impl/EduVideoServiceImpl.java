@@ -1,5 +1,6 @@
 package com.example.peiwen.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.peiwen.entity.EduVideo;
 import com.example.peiwen.mapper.EduVideoMapper;
 import com.example.peiwen.service.EduVideoService;
@@ -17,4 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> implements EduVideoService {
 
+    @Override
+    //        1根据课程id删除小节
+    //    此时删除小节还没有删除视频
+    public void removeVideoByCourseId(String courseId) {
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id",courseId);
+        baseMapper.delete(wrapper);
+    }
 }

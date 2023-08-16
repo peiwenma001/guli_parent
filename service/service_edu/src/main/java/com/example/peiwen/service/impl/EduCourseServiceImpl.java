@@ -1,14 +1,22 @@
 package com.example.peiwen.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.peiwen.entity.EduCourse;
 import com.example.peiwen.entity.EduCourseDescription;
 import com.example.peiwen.entity.vo.CourseInfoVo;
+import com.example.peiwen.entity.vo.CoursePublishVo;
+import com.example.peiwen.entity.vo.CourseQuery;
 import com.example.peiwen.mapper.EduCourseMapper;
+import com.example.peiwen.service.EduChapterService;
 import com.example.peiwen.service.EduCourseDescriptionService;
 import com.example.peiwen.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.peiwen.service.EduVideoService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
@@ -25,6 +33,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     //    添加课程基本信息
     @Resource
     private EduCourseDescriptionService eduCourseDescriptionService;
+    @Resource
+    private EduVideoService eduVideoService;
+    @Resource
+    private EduChapterService eduChapterService;
     @Override
     public String saveCourseInfo(CourseInfoVo courseInfoVo) {
 //        1向课程表添加课程基本信息
@@ -68,5 +80,61 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         BeanUtils.copyProperties(courseInfoVo,eduCourseDescription);
         eduCourseDescriptionService.updateById(eduCourseDescription);
+    }
+
+    @Override
+    //    根据课程id查询课程确认信息
+    public CoursePublishVo publishCourseInfo(String id) {
+//        调用mapper
+        CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
+        return publishCourseInfo;
+    }
+
+    @Override
+    //      课程列表条件查询带分页
+    public void pageQuery(Page<EduCourse> pageParam, CourseQuery courseQuery) {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("gmt_create");
+
+        if (courseQuery == null){
+            baseMapper.selectPage(pageParam, queryWrapper);
+            return;
+        }
+
+        String title = courseQuery.getTitle();
+        String teacherId = courseQuery.getTeacherId();
+        String subjectParentId = courseQuery.getSubjectParentId();
+        String subjectId = courseQuery.getSubjectId();
+
+        if (!StringUtils.isEmpty(title)) {
+            queryWrapper.like("title", title);
+        }
+
+        if (!StringUtils.isEmpty(teacherId) ) {
+            queryWrapper.eq("teacher_id", teacherId);
+        }
+
+        if (!StringUtils.isEmpty(subjectParentId)) {
+            queryWrapper.ge("subject_parent_id", subjectParentId);
+        }
+
+        if (!StringUtils.isEmpty(subjectId)) {
+            queryWrapper.ge("subject_id", subjectId);
+        }
+
+        baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    @Override
+    //    删除课程
+    public void removeCourse(String courseId) {
+//        1根据课程id删除小节
+        eduVideoService.removeVideoByCourseId(courseId);
+//        2根据课程id删除章节
+        eduChapterService.removeChapterByCourseId(courseId);
+//        3根据课程id删除描述
+        eduCourseDescriptionService.removeById(courseId);
+//        4根据课程id删除课程本身
+        int result = baseMapper.deleteById(courseId);
     }
 }

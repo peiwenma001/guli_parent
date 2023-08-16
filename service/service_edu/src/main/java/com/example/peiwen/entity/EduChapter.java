@@ -28,7 +28,7 @@ public class EduChapter implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "章节ID")
-      @TableId(value = "id", type = IdType.ID_WORKER_STR)
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
     @ApiModelProperty(value = "课程ID")
